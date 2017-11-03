@@ -1,0 +1,10 @@
+producer:
+  bootstrap: localhost:9092
+  brokers: localhost:9092
+  producttopic: product_topic
+  productgroup: productconsumer
+  partitionCount: 1
+  acks: all
+  retries: 3
+  minPoolSize: 80
+  maxPoolSize: 100

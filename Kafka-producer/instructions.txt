@@ -1,0 +1,60 @@
+Kafka Version :
+
+kafka_2.11-0.10.1.1
+
+Topic Creation :
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic product_topic
+
+
+M06GMBS32MKG8WN:kafka_2.11-0.10.1.1 user$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic product_topic
+WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.
+Created topic "product_topic".
+M06GMBS32MKG8WN:kafka_2.11-0.10.1.1 user$
+	
+Publishing Data from Command Line :
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic product_topic
+
+
+Start Zookeeper :
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Start Kafka :
+bin/kafka-server-start.sh config/server.properties
+
+
+Consumer Side : 
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic product_topic --from-beginning
+
+M06GMBS32MKG8WN:kafka_2.11-0.10.1.1 user$ bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic product_topic --from-beginning
+{"pogId":641724815500,"supc":"PDL641724815500M","brand":"Tomcat","description":"Tomcat Blue Floater Sandals","size":"M","category":"FOOTWEAR","subCategory":"Sports Shoes","price":599.0,"quantity":0,"country":"Lebanon","sellerCode":"23143","stock":"In Stock","creationTimeStamp":1509699932826}
+
+Consumer with parition number
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic product_topic  --partition 2 --from-beginning
+
+
+
+Maven :
+
+export PATH=$M2:/Users/raghugupta/Downloads/apache-maven-3.5.0/bin
+
+
+
+Steps :
+
+Look at application.yml and change properties accordingly.
+
+Upload project as Maven Project in Eclipse
+
+From Command Line : 
+
+1. Java 8
+2. Configure Maven if not present export PATH=$PATH:/Users/Downloads/apache-maven-3.5.0/bin
+
+mvn clean install -DskipTests
+java -jar target/ROOT.war
+
+
+Producer will start publishing to Kafka.
+
