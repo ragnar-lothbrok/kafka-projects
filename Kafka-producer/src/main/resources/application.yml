@@ -1,0 +1,10 @@
+producer:
+  bootstrap: localhost:9092
+  brokers: localhost:9092
+  producttopic: product_topic
+  partitionCount: 1
+  acks: all
+  retries: 3
+  minPoolSize: 80
+  maxPoolSize: 120
+  filePath: /Users/raghugupta/Documents/ApacheKafka_CaseStudies/products.csv
