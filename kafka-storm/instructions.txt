@@ -1,0 +1,12 @@
+Steps 1:
+
+1. Start ZooKeeper
+2. Start Kafka
+3. Push keywords data using Kafka Connector
+4. Download Kafka-storm project and load into eclipse
+5. mvn clean install -DskipTests
+6. java -jar kafka-storm-0.0.1-SNAPSHOT-jar-with-dependencies.jar 192.168.0.15:2181 connect-test
+
+It will start consuming data from Kafka.
+
+Consumed Format : {"schema":{"type":"string","optional":false},"payload":"home depot"}
