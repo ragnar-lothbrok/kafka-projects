@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
-Implementation-Title: kafka-consumer
+Implementation-Title: kafka-consumer-stream
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: raghugupta
-Implementation-Vendor-Id: com.edureka.kafka
+Implementation-Vendor-Id: com.kafka.edureka
 Build-Jdk: 1.8.0_92
 Implementation-URL: http://projects.spring.io/spring-boot/kafka-consum
- er/
+ er-stream/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 

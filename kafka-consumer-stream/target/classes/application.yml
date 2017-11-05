@@ -1,5 +1,5 @@
 producer:
-  bootstrap: localhost:9092
+  bootstrap: localhost:2181
   brokers: localhost:9092
   producttopic: product_topic
   productgroup: productconsumer
