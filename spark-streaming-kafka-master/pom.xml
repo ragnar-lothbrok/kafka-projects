@@ -83,7 +83,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.edureka.kafka.KeywordTopology</mainClass>
+							<mainClass>com.sparkdemo.SparkStreamingApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -104,7 +104,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.edureka.kafka.KeywordTopology</mainClass>
+							<mainClass>com.sparkdemo.SparkStreamingApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
