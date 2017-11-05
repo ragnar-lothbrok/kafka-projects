@@ -1,0 +1,9 @@
+server:
+  port: 8000
+producer:
+  bootstrap: 192.168.0.15:2181
+  brokers: 192.168.0.15:9092
+  topic: transaction
+  group: transaction
+  partitionCount: 2
+  fileName: SalesJan2009.csv
