@@ -47,8 +47,8 @@ From Command Line :
 2. Configure Maven if not present export PATH=$PATH:/Users/Downloads/apache-maven-3.5.0/bin
 
 mvn clean install -DskipTests
-java -jar target/ROOT.war
+java -jar target/spark-streaming-kafka-0.0.1-SNAPSHOT.jar 
 
 
-Consumer will start consuming.
+You can also submit job to Spark Shell
 
