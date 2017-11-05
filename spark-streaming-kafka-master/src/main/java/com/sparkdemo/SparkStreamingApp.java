@@ -26,7 +26,7 @@ public class SparkStreamingApp {
 		JavaStreamingContext ssc = new JavaStreamingContext(sc, new Duration(2000l));
 
 		Map<String, String> kafkaParams = new HashMap<>();
-		kafkaParams.put("metadata.broker.list", "localhost:9092");
+		kafkaParams.put("metadata.broker.list", "192.168.0.15:9092");
 		kafkaParams.put("auto.offset.reset", "smallest");
 		Set<String> topics = Collections.singleton("transaction");
 
