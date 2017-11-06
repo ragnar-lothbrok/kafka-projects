@@ -10,3 +10,6 @@ Steps 1:
 It will start consuming data from Kafka.
 
 Consumed Format : {"schema":{"type":"string","optional":false},"payload":"home depot"}
+
+
+install hadoop : https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/
