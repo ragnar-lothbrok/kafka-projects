@@ -18,7 +18,8 @@ import com.edureka.cassandra.java.client.repository.ProductRepository;
 import com.edureka.kafka.config.props.KafkaProperties;
 import com.edureka.kafka.deserializers.CustomJsonDeserializer;
 import com.edureka.kafka.dto.Product;
-import com.edureka.kafka.threads.ProductKafkaConsumerThread;
+import com.edureka.kafka.threads.ProductDetailKafkaConsumerThread;
+import com.edureka.kafka.threads.ProductInventoryKafkaConsumerThread;
 
 @Service
 public class KafkaConsumerListener implements SmartLifecycle {
@@ -32,17 +33,19 @@ public class KafkaConsumerListener implements SmartLifecycle {
 
 	@Autowired
 	private ProductRepository productRepository;
-	
-	
+
 	@Autowired
 	private ProductPriceInventoryService productPriceInventoryService;
 
 	public void start() {
 		LOGGER.info("Starting different threads to consume data.");
-		ExecutorService balalnceConsumerExecutorService = Executors
-				.newFixedThreadPool(kafkaProperties.getPartitionCount());
+		ExecutorService consumerExecutorService1 = Executors.newFixedThreadPool(kafkaProperties.getPartitionCount());
+		ExecutorService consumerExecutorService2 = Executors.newFixedThreadPool(kafkaProperties.getPartitionCount());
 		for (int i = 0; i < kafkaProperties.getPartitionCount(); i++) {
-			balalnceConsumerExecutorService.execute(new ProductKafkaConsumerThread(balanceKafkaConsumer(),productRepository,productPriceInventoryService));
+			consumerExecutorService1.execute(
+					new ProductInventoryKafkaConsumerThread(kafkaConsumer("consumer2"), productPriceInventoryService));
+			consumerExecutorService2
+					.execute(new ProductDetailKafkaConsumerThread(kafkaConsumer("consumer1"), productRepository));
 		}
 		this.running = true;
 	}
@@ -71,10 +74,10 @@ public class KafkaConsumerListener implements SmartLifecycle {
 		return new org.apache.kafka.common.serialization.StringDeserializer();
 	}
 
-	public KafkaConsumer<String, Product> balanceKafkaConsumer() {
+	public KafkaConsumer<String, Product> kafkaConsumer(String groupId) {
 		KafkaConsumer<String, Product> consumer = new KafkaConsumer<String, Product>(
-				createConsumerConfig(kafkaProperties.getBootstrap(), kafkaProperties.getProductgroup()),
-				stringKeyDeserializer(), new CustomJsonDeserializer<Product>(Product.class));
+				createConsumerConfig(kafkaProperties.getBootstrap(), groupId), stringKeyDeserializer(),
+				new CustomJsonDeserializer<Product>(Product.class));
 		consumer.subscribe(Collections.singletonList(kafkaProperties.getProducttopic()));
 		return consumer;
 	}

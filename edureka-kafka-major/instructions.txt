@@ -21,6 +21,16 @@ Download cassandra
 	PRIMARY KEY ((pogid,supc))
 );
 
+
+Mysql : 
+
+CREATE TABLE `product_inventory` (
+  `pogId` bigint(20) NOT NULL,
+  `supc` varchar(255) NOT NULL,
+  `price` float NOT NULL,
+  `quantity` bigint(20) NOT NULL,
+  PRIMARY KEY (`pogId`,`supc`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
  
  
 Kafka Version :

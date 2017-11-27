@@ -10,25 +10,20 @@ import com.edureka.cassandra.java.client.repository.ProductRepository;
 import com.edureka.kafka.dto.Product;
 import com.edureka.kafka.performance.MonitoringCache;
 import com.edureka.kafka.performance.MonitoringCache.Caches;
-import com.edureka.kafka.service.ProductPriceInventoryService;
 
-public class ProductKafkaConsumerThread extends Thread {
+public class ProductDetailKafkaConsumerThread extends Thread {
 
-	private static final Logger logger = LoggerFactory.getLogger(ProductKafkaConsumerThread.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProductDetailKafkaConsumerThread.class);
 
 	private KafkaConsumer<String, Product> productKafkaConsumer;
 
 	private ProductRepository productRepository;
 
-	private ProductPriceInventoryService productPriceInventoryService;
-
-	public ProductKafkaConsumerThread(final KafkaConsumer<String, Product> balanceKafkaConsumer,
-			final ProductRepository productRepository,
-			final ProductPriceInventoryService productPriceInventoryService) {
+	public ProductDetailKafkaConsumerThread(final KafkaConsumer<String, Product> productKafkaConsumer,
+			final ProductRepository productRepository) {
 		super();
-		this.productKafkaConsumer = balanceKafkaConsumer;
+		this.productKafkaConsumer = productKafkaConsumer;
 		this.productRepository = productRepository;
-		this.productPriceInventoryService = productPriceInventoryService;
 	}
 
 	@Override
@@ -47,8 +42,6 @@ public class ProductKafkaConsumerThread extends Thread {
 
 						productRepository.insertProduct(product);
 
-						productPriceInventoryService.savePriceInventory(product.getPrice(), product.getQuantity(),
-								product.getPogId(), product.getSupc());
 					}
 					this.productKafkaConsumer.commitSync();
 				} catch (Exception e) {

@@ -38,7 +38,7 @@ public class KafkaConsumerListener implements SmartLifecycle {
 		ExecutorService balalnceConsumerExecutorService = Executors
 				.newFixedThreadPool(kafkaProperties.getPartitionCount());
 		for (int i = 0; i < kafkaProperties.getPartitionCount(); i++) {
-			balalnceConsumerExecutorService.execute(new ProductKafkaConsumerThread(balanceKafkaConsumer(),productRepository));
+			balalnceConsumerExecutorService.execute(new ProductKafkaConsumerThread(kafkaConsumer(),productRepository));
 		}
 		this.running = true;
 	}
@@ -67,7 +67,7 @@ public class KafkaConsumerListener implements SmartLifecycle {
 		return new org.apache.kafka.common.serialization.StringDeserializer();
 	}
 
-	public KafkaConsumer<String, Product> balanceKafkaConsumer() {
+	public KafkaConsumer<String, Product> kafkaConsumer() {
 		KafkaConsumer<String, Product> consumer = new KafkaConsumer<String, Product>(
 				createConsumerConfig(kafkaProperties.getBootstrap(), kafkaProperties.getProductgroup()),
 				stringKeyDeserializer(), new CustomJsonDeserializer<Product>(Product.class));

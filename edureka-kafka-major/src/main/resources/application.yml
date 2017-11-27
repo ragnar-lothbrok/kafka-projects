@@ -1,7 +1,7 @@
 producer:
   bootstrap: localhost:9092
   brokers: localhost:9092
-  producttopic: product_topic
+  producttopic: product_topicc
   productgroup: productconsumer
   partitionCount: 1
   acks: all
