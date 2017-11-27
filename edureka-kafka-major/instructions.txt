@@ -1,0 +1,53 @@
+Download cassandra
+
+1. bin/cassandra
+2. bin/cqlsh
+3. describe keyspaces
+4. CREATE KEYSPACE edureka
+  WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+ 5.use edureka
+ 6.
+ 
+ Create table products_v2 (
+	pogid bigint,
+	supc text,
+	brand text,
+	size text,
+	description text,
+	category text,
+    subcategory text,
+    country text,
+    sellercode text,
+	PRIMARY KEY ((pogid,supc))
+);
+
+ 
+ 
+Kafka Version :
+
+kafka_2.11-0.10.1.1
+
+Start Zookeeper :
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Start Kafka :
+bin/kafka-server-start.sh config/server.properties
+
+Topic Creation :
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic product_topic
+	
+Publishing Data from Command Line :
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic product_topic
+
+
+
+Consumer Side : 
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic product_topic --from-beginning
+
+M06GMBS32MKG8WN:kafka_2.11-0.10.1.1 user$ bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic product_topic --from-beginning
+{"pogId":641724815500,"supc":"PDL641724815500M","brand":"Tomcat","description":"Tomcat Blue Floater Sandals","size":"M","category":"FOOTWEAR","subCategory":"Sports Shoes","price":599.0,"quantity":0,"country":"Lebanon","sellerCode":"23143","stock":"In Stock","creationTimeStamp":1509699932826}
+
+Consumer with parition number
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic product_topic  --partition 2 --from-beginning
