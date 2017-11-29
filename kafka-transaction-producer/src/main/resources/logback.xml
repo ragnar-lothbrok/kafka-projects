@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="FILE_METRIC"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/tmp/logs/producer.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %class{36}.%M %L -
+				%msg%n </Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/tmp/logs/producer.log.%d{yyyy-MM-dd}.%i.gz
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 50MB -->
+				<maxFileSize>1024MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+	</appender>
+
+	<appender name="Console-Appender" class="ch.qos.logback.core.ConsoleAppender">
+		<layout>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %class{36}.%M %L -
+				%msg%n</pattern>
+		</layout>
+	</appender>
+
+	<logger name="com.shadowfax" level="INFO" additivity="false">
+		<appender-ref ref="FILE_METRIC" />
+		<appender-ref ref="Console-Appender" />
+	</logger>
+
+	<logger name="metriclogger" level="INFO" additivity="false">
+		<appender-ref ref="FILE_METRIC" />
+		<appender-ref ref="Console-Appender" />
+	</logger>
+
+	<logger name="org.springframework" level="INFO" additivity="false">
+		<appender-ref ref="FILE_METRIC" />
+		<appender-ref ref="Console-Appender" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="FILE_METRIC" />
+		<appender-ref ref="Console-Appender" />
+	</root>
+
+</configuration>
