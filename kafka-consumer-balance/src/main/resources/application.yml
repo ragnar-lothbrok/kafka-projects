@@ -1,0 +1,5 @@
+consumer:
+  bootstrap: 192.168.0.15:9092
+  topic: txevent
+  group: transactiongroup
+  partition: 3

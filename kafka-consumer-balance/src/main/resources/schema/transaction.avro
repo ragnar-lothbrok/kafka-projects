@@ -1,0 +1,14 @@
+{
+    "type": "record",
+    "name": "transaction",
+    "fields": [
+        { "name": "txId", "type": "long" },
+        { "name": "customerId", "type": "long" },
+        { "name": "merchantId", "type": "long" },
+        { "name": "status", "type": "string" },
+        { "name": "timestamp", "type": "long" },
+        { "name": "invoiceNum", "type": "string" },
+        { "name": "invoiceAmount", "type": "float" },
+        { "name": "segment", "type": "string" }
+    ]
+}
