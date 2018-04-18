@@ -26,7 +26,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.shadowfax" level="INFO" additivity="false">
+	<logger name="com.edureka" level="INFO" additivity="false">
 		<appender-ref ref="FILE_METRIC" />
 		<appender-ref ref="Console-Appender" />
 	</logger>

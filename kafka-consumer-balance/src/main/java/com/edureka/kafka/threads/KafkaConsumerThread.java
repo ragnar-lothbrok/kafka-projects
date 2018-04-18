@@ -33,6 +33,7 @@ public class KafkaConsumerThread extends Thread {
 					for (ConsumerRecord<String, String> record : records) {
 						logger.info("Consuming from topic = {}, partition = {}, offset = {}, key = {}, value = {}",
 								record.topic(), record.partition(), record.offset(), record.key(), record.value());
+						System.out.println(record.value());
 						offsetFileManager.saveOffsetInOffsetManager(record.topic(), record.partition(),
 								record.offset());
 					}
