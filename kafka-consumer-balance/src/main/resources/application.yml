@@ -1,5 +1,5 @@
 consumer:
-  bootstrap: 192.168.0.15:9092
+  bootstrap: localhost:9092
   topic: keyword_topic
   group: keyword_topic_gp
   partition: 3

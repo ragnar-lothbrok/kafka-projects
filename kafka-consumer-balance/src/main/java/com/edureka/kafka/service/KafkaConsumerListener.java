@@ -31,7 +31,7 @@ public class KafkaConsumerListener implements SmartLifecycle {
 	public void start() {
 		LOGGER.info("Starting different threads to consume data.");
 		ExecutorService consumerExecutorService = Executors.newFixedThreadPool(kafkaProperties.getPartition());
-		for (int i = 0; i < kafkaProperties.getPartition()-2; i++) {
+		for (int i = 0; i < kafkaProperties.getPartition(); i++) {
 			consumerExecutorService
 					.execute(new KafkaConsumerThread(kafkaConsumer(), new OffsetFileManager("prefix")));
 		}
