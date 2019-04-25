@@ -17,3 +17,8 @@ listeners=PLAINTEXT://localhost:9092 (post this you won't get any error)
 
 
 Kafka downloaded : kafka_2.12-2.2.0
+
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+bin/kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic test1
