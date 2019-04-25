@@ -1,0 +1,5 @@
+1. Go to folder kafka_2.12-2.2.0
+2. bin/zookeeper-server-start.sh  config/zookeeper.properties
+3. bin/kafka-server-start.sh  config/server.properties
+4. bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test1
+5. bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test2
