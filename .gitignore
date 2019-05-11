@@ -4,6 +4,7 @@
 *.DS_Store
 # Log file
 *.log
+*.iml
 *.settings
 # BlueJ files
 *.ctxt
