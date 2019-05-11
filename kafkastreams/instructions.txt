@@ -25,3 +25,14 @@ Kafka downloaded : kafka_2.12-2.2.0
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
 
 bin/kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic test1
+
+This projects
+
+1. Send data to kafka (Using Timer task)
+2. If fails to get acknowledgement store data in rocks db
+3. Another timer task reads from rocks db and sends to kafka
+    a. if sent then delete from rocks db
+    b. if not keep as it is
+
+
+Modifications : 
