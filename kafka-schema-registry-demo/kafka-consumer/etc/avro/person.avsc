@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "name": "Person",
+  "namespace": "com.bigdata.kafka.avro",
+  "fields": [
+    {
+      "name": "firstName",
+      "type": "string"
+    },
+    {
+      "name": "lastName",
+      "type": "string"
+    },
+    {
+      "name": "birthDate",
+      "type": "long"
+    },
+    {
+          "name": "createDate",
+          "type": "long"
+        }
+  ]
+}
