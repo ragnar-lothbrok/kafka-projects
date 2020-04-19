@@ -6,6 +6,11 @@ Start Kafka
 
  .\bin\windows\kafka-server-start.bat .\config\server.properties  
 
+Details in Zookeeper
+
+zookeeper-shell.bat localhost:2181 ls /brokers/ids
+zookeeper-shell.bat localhost:2181 ls /brokers
+
 Topic Creation
 
     .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 4 --topic weather_raw_events
