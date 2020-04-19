@@ -1,0 +1,76 @@
+ Start Zookeeper
+
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties 
+
+Start Kafka
+
+ .\bin\windows\kafka-server-start.bat .\config\server.properties  
+
+Topic Creation
+
+    .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 4 --topic weather_raw_events
+
+
+    .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 2 --partitions 4 --topic  topic7
+
+
+Console Producer
+
+ .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic mirror_topic
+
+Console Consumer
+
+    .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic weather_events
+
+Running Mirror Maker
+
+.\bin\windows\kafka-mirror-maker.bat --consumer.config .\config\consumer.properties --producer.config .\config\producer.properties --whitelist mirror_topic 
+
+
+
+ .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 4 --topic destinationTopic
+
+ Kafka Monitor
+
+ java -cp KafkaOffsetMonitor-assembly-0.4.6-SNAPSHOT.jar com.quantifind.kafka.offsetapp.OffsetGetterWeb --zk localhost:2181 --port 8089 --refresh 10.seconds --retain 2.days --offsetStorage kafka --kafkaBrokers localhost:9092
+
+https://github.com/big-data-europe/docker-hadoop
+
+Update below section
+
+datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.1.3-java8
+    container_name: datanode
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+    extra_hosts:
+    - "HP-Laptop:192.168.0.101"
+
+Add your hostname (In my case it was HP-Laptop) with the IP (using IPConfig command).
+
+Once above project is clones or downloaded use
+
+docker-compose up -d (Will start all docker container present in docker yml)
+
+docker-compose down (Will stop all containers)
+
+Copy file from local system to specified docker container
+
+	docker cp .\apache-flume-1.9.0-bin edb662ae00a2:/home/
+
+Running Flume Agent
+
+../bin/flume-ng agent -n agent -c conf -f flume_kafka.conf
+
+
+https://github.com/renukaradhya/confluentplatform/tree/master/bin/windows
+
+.\bin\windows\schema-registry-start.bat .\etc\schema-registry\schema-registry.properties
+
+log4j file in schema-registry
+
+keytool -keystore server.keystore.jks -alias localhost -validity 30 -genkey -keyalg RSA
